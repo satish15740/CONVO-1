@@ -1,1 +1,5 @@
-
+name: Python
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run a Python check
+      run: python satish-convo.py  # Adjust this if needed
