@@ -1,2 +1,3 @@
 # TRICKS-BY-SATISH
-! (https://i.imgur.com/XVDsbLe.mp4)
+
+https://youtu.be/sA6jmjtvSAU?si=EwvdvbSy-ROEGQin
