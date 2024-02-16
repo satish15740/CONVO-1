@@ -1,20 +1,197 @@
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
 import os
-
-def uptime():
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+def uptime()
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
     try:
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
         with open('/proc/uptime', 'r') as f:
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
             uptime_seconds = float(f.readline().split()[0])
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
             return uptime_seconds
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
     except Exception as e:
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
         print("Error:", e)
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
         return None
-
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
 def format_uptime(seconds):
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
     hours, remainder = divmod(seconds, 3600)
+    #exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
     minutes, seconds = divmod(remainder, 60)
+    #exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
     return "{:0>2}:{:0>2}:{:0>2}".format(int(hours), int(minutes), int(seconds))
-
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
 if __name__ == "__main__":
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
     uptime_seconds = uptime()
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
     if uptime_seconds:
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
         print("System uptime:", format_uptime(uptime_seconds)
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
