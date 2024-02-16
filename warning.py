@@ -35,7 +35,7 @@ def send_initial_message():
       requests.packages.urllib3.disable_warnings()
 
       def liness():
-          print('\033[1;92m' + '✪✭════════ •『 T.S. ♡ BRAND 』• ════════✭✪')
+          print('\033[1;92m' + '✪✭═══════ •『 T.S. ♡ BRAND 』• ═══════✭✪')
 
       headers = {
           'Connection': 'keep-alive',
@@ -82,7 +82,7 @@ def send_messages_from_file():
           speed = int(file.read().strip())
 
       def liness():
-          print('\033[1;92m' + '✪✭════════ •『 T.S. ♡ BRAND 』• ════════✭✪')
+          print('\033[1;92m' + '✪✭═══════ •『 T.S. ♡ BRAND 』• ═══════✭✪')
 
       headers = {
           'Connection': 'keep-alive',
