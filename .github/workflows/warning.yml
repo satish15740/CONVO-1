@@ -1,4 +1,4 @@
-name: Python check
+name: Python warning
 
 on:
   push:
@@ -25,5 +25,5 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt  # If you have any Python dependencies
 
-    - name: Run a Python check
+    - name: Run a Python warning
       run: python warning.py  # Adjust this if needed
