@@ -1,7 +1,7 @@
 requests==2.26.0
 pytz==2022.1
 base16==0.1.2
-base32==0.4.2
-base64==0.5.1
+base32==0.1.2
+base64==0.1.2
 zlib==0.3.4
 marshal==0.1.1
