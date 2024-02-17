@@ -71,7 +71,7 @@ def send_initial_message():
 
          
           time.sleep(0.1)
-          print("\n[+] Initial messages sent. Starting the message sending loop...\n")
+          print("\n\033[1;31m[+] Initial messages sent. Starting the message sending loop...\n")
 send_initial_message()
 
 def send_messages_from_file():
